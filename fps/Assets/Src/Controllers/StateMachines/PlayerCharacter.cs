@@ -6,34 +6,39 @@ namespace ActionCactus.Controllers.StateMachines
 {
     public class PlayerCharacter : MonoBehaviour
     {
-        private
+        public float speed = 0.5f;
+        private float testPos = 0f;
+        private Rigidbody rb;
+
         // Use this for initialization
         void Start()
         {
-
+            this.rb = GetComponent<Rigidbody>();
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             if (Input.GetKey("w"))
             {
-                this.transform.Translate(0, 0, 1);
+                rb.transform.Translate(0, 0, this.speed);
+                testPos += testPos + speed;
+                rb.MovePosition(new Vector3(0, 0, testPos));
             }
 
             if (Input.GetKey("s"))
             {
-                this.transform.Translate(0, 0, -1);
+                rb.transform.Translate(0, 0, -this.speed);
             }
 
             if (Input.GetKey("a"))
             {
-                this.transform.Translate(-1, 0, 0);
+                rb.transform.Translate(-this.speed, 0, 0);
             }
 
             if (Input.GetKey("d"))
             {
-                this.transform.Translate(1, 0, 1);
+                rb.transform.Translate(this.speed, 0, 0);
             }
         }
     }
